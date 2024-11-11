@@ -37,12 +37,12 @@ int main() {
 
 						if (i == 0 && j == 0) continue;
 
-						int linha_vizinha = linha + i;
-						int coluna_vizinha = coluna + j;
+						int linha_adj = linha + i;
+						int coluna_adj = coluna + j;
 
 						// Aqui conta bomba
-						if (linha_vizinha >= 0 && linha_vizinha < 5 && coluna_vizinha >= 0 && coluna_vizinha < 5) {
-							if (campo_revelado[linha_vizinha][coluna_vizinha] == -1) {
+						if (linha_adj >= 0 && linha_adj < 5 && coluna_adj >= 0 && coluna_adj < 5) {
+							if (campo_revelado[linha_adj][coluna_adj] == -1) {
 								bombas_redor++;
 							}
 						}
@@ -72,7 +72,7 @@ int main() {
 			
 		}
 		else {
-			printf("Digite uma posição no alcance.");
+			printf("Digite uma posição no alcance. \n");
 		};
 	};
 
