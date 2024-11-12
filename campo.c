@@ -17,64 +17,85 @@ int main() {
 		{0, 0, 0, 0, 0}
 	};
 
-
 	int linha, coluna;
 	int vidas = 1;
+	int escolha = 1;
 
-	while (vidas >= 1) {
-		printf("Escolha uma linha e coluna.\n");
-		scanf("%d%d", &linha, &coluna);
+	while (escolha == 1){
+		switch (vidas){
+		case 0:
+			escolha = 0;
+			printf("Deseja jogar novamente? \n");
+			printf("1 - Sim \n 2 - Não \n");
+			scanf("%d", &escolha);
+			if (escolha == 1){
+				vidas = 1;
+
+				// Essa parte ta servindo para resetar o campo se a pessoa perder e decidir jogar outra vez //
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
+						campo[i][j] = 0;
+					}
+				}
+				////////////////////////////////////////////////////////////////////////////////////////////
+			}
+			break;
+		case 1:
+			printf("Escolha uma linha e coluna.\n");
+			scanf("%d%d", &linha, &coluna);
 
 
-		if (linha >= 0 && linha < 5 && coluna >= 0 && coluna < 5) {
-			campo[linha][coluna] = campo_revelado[linha][coluna];
-			if (campo_revelado[linha][coluna] == 0){
-				int bombas_redor = 0;
+			if (linha >= 0 && linha < 5 && coluna >= 0 && coluna < 5) {
+				campo[linha][coluna] = campo_revelado[linha][coluna];
+				if (campo_revelado[linha][coluna] == 0){
+					int bombas_redor = 0;
 
-				// aqui é pra percorrer as posições num alcance de 3x3 tomando a posição que o usuário botou sendo o centro ( 0 em i e j ) 
-				for (int i = -1; i <= 1; i++) {
-					for (int j = -1; j <= 1; j++) {
+					// aqui é pra percorrer as posições num alcance de 3x3 tomando a posição que o usuário botou sendo o centro ( 0 em i e j ) 
+					for (int i = -1; i <= 1; i++) {
+						for (int j = -1; j <= 1; j++) {
 
-						if (i == 0 && j == 0) continue;
+							if (i == 0 && j == 0) continue;
 
-						int linha_adj = linha + i;
-						int coluna_adj = coluna + j;
+							int linha_adj = linha + i;
+							int coluna_adj = coluna + j;
 
-						// Aqui conta bomba
-						if (linha_adj >= 0 && linha_adj < 5 && coluna_adj >= 0 && coluna_adj < 5) {
-							if (campo_revelado[linha_adj][coluna_adj] == -1) {
-								bombas_redor++;
+							// Aqui conta bomba
+							if (linha_adj >= 0 && linha_adj < 5 && coluna_adj >= 0 && coluna_adj < 5) {
+								if (campo_revelado[linha_adj][coluna_adj] == -1) {
+									bombas_redor++;
+								}
 							}
 						}
 					}
+					
+					// Nova matriz sendo que substituindo a posição escolhida pelo número de bombas adjascentes que detectou
+					campo[linha][coluna] = bombas_redor;
+				}
+				else {if (campo_revelado[linha][coluna] == -1) {
+					campo[linha][coluna] = campo_revelado[linha][coluna];
+					vidas = 0;
+					printf("   ____   ____   ____  __  __ _ \n  |  _ \\ / __ \\ / __ \\|  \\/  | | \n  | |_) | |  | | |  | | \\  / | | \n  |  _ <| |  | | |  | | |\\/| | | \n  | |_) | |__| | |__| | |  | |_| \n  |____/ \\____/ \\____/|_|  |_(_) \n ");
+					
+					
 				}
 				
-				// Nova matriz sendo que substituindo a posição escolhida pelo número de bombas adjascentes que detectou
-				campo[linha][coluna] = bombas_redor;
-			}
-			else {if (campo_revelado[linha][coluna] == -1) {
-				campo[linha][coluna] = campo_revelado[linha][coluna];
-				vidas = -1;
-				printf("   ____   ____   ____  __  __ _ \n  |  _ \\ / __ \\ / __ \\|  \\/  | | \n  | |_) | |  | | |  | | \\  / | | \n  |  _ <| |  | | |  | | |\\/| | | \n  | |_) | |__| | |__| | |  | |_| \n  |____/ \\____/ \\____/|_|  |_(_) \n ");
-
-				printf("Deseja jogar novamente? \n");
-				
-			}
-			
-			};
-			// Mostrando o campo atualizado (número de bombas e bomba se foi selecionada)
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 5; j++) {
-						printf("%d ", campo[i][j]);
+				};
+				// Mostrando o campo atualizado (número de bombas e bomba se foi selecionada)
+					for (int i = 0; i < 5; i++) {
+						for (int j = 0; j < 5; j++) {
+							printf("%d ", campo[i][j]);
+						}
+						printf("\n");
 					}
-					printf("\n");
-				}
-			
-		}
-		else {
-			printf("Digite uma posição no alcance. \n");
-		};
+				
+			}
+			else {
+				printf("Digite uma posição no alcance. \n");
+			};
+			break;
 	};
+	};
+	
 
 	return 0;
 }
