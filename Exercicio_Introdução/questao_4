@@ -1,0 +1,28 @@
+Algoritmo checar_primo(n, resultado)
+Entrada n número pertencente ao inteiros, maior que 1 e menor que 1 bilhão.
+Saída resultado valor booleano informando se a suposição do número ser primo é verdadeira ou falsa.
+
+
+N = (número positivo)
+Checador numero_primo(N){
+	Se (N % 2 = 0 && N ≠  2 ){
+		resultado = False
+		}
+	Senão{
+		Se (N % 3 = 0 && N ≠ 3){
+			resultado = False
+		}
+		Senão{
+			Se (N % 5 = 0 && N ≠ 5){
+				resultado = False
+			}
+			Senão{
+				resultado = True
+			}
+		}
+		}
+
+Fim algoritmo
+
+
+(Incompleto modificar)
