@@ -15,18 +15,17 @@ respectivamente.
 int main() {
     int A[] = {9, 5, 8, 2, 1, 3, 5, 9, 4, 1};
     int i;
-    int j = i + 1; // J aqui é basicamente o número seguinte
     int dif; // diferença
     int maior_dif = 0; // maior diferença
     int tamanho = sizeof(A) / sizeof(A[0]);
 
-    for (i = 0; i < tamanho; i++){
+    for (i = 0; i < tamanho - 1; i++){
+        int j = i + 1; // número seguinte
         dif = abs(A[i] - A[j]);
         if (maior_dif < dif){
-            maior_dif <- dif;
+            maior_dif = dif;
         }
     }
 
-    return maior_dif;
-
+    printf("%d", maior_dif);
 }
