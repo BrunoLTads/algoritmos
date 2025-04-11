@@ -1,0 +1,38 @@
+/*
+
+Escreva um algoritmo que receba um array A de n números naturais e determine se o array está ordenado em
+ordem não decrescente, ou seja, do menor para o maior.
+
+*/
+
+#include <stdio.h>
+
+
+int main() {
+    int A[] = {9, 5, 8, 2, 1, 3, 5, 9, 4, 1};
+    int i;
+    int checar; // diferença
+    int tamanho = sizeof(A) / sizeof(A[0]);
+
+    for (i = 0; i < tamanho - 1; i++){
+        int j = i + 1; // número seguinte
+        checar = (A[i] - A[j]);
+        
+
+        if (checar - 0){
+            printf("Crescente");
+        }
+        else{
+            printf("Decrescente");
+        }
+    }
+}
+
+
+
+
+/*
+
+Se ordem decrescente, A[i] - A[j] vai ser um valor negativo.
+
+*/
